@@ -205,6 +205,7 @@ class Datta_Ajaxminicart_Checkout_CartController extends Mage_Checkout_CartContr
         $_response->setDiscount($discount);           
         $_response->setShippingtaxamount($shippingTaxamount);
         $_response->setCartcount($count);
+        $_response->setCartcountall(20);
         $_response->setMessage($this->__('Item was removed'));
         //append updated blocks
         $this->getLayout()->getUpdate()->addHandle('ajaxminicart');
@@ -260,6 +261,7 @@ class Datta_Ajaxminicart_Checkout_CartController extends Mage_Checkout_CartContr
         //get discount value end             
         $_response->setCarttotal($grandTotal);
         $_response->setCartcount($count);
+        $_response->setCartcountall(20);
         $_response->setDiscount($discount);
         $_response->setShippingtaxamount($shippingTaxamount);
         $_response->setCartsubtotal($subTotal); 

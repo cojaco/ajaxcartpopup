@@ -124,6 +124,7 @@ class Datta_Ajaxminicart_Model_Observer {
                     ->setCarttotal($grandTotal)
                     ->setCartsubtotal($subTotal)
                     ->setCartcount($count) 
+                    ->setCartcountall(20)
                     ->setDiscount($discount)
                     ->setShippingtaxamount($shippingTaxamount)
                     ->setCartitem($html)                                                                 
