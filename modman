@@ -1,7 +1,6 @@
-app/code/community/HusseyCoding app/code/community/HusseyCoding
-app/design/frontend/base/default/layout/* app/design/frontend/base/default/layout/
-app/design/frontend/base/default/template/ajaxcartpopup app/design/frontend/base/default/template/ajaxcartpopup
-app/etc/modules/* app/etc/modules/
-skin/frontend/base/default/css/* skin/frontend/base/default/css/
-skin/frontend/base/default/images/ajaxcartpopup skin/frontend/base/default/images/ajaxcartpopup
-skin/frontend/base/default/js/* skin/frontend/base/default/js/
+app/design/frontend/base/default/template/ajaxminicart     app/design/frontend/base/default/template/ajaxminicart
+app/etc/modules/Datta_Ajaxminicart.xml                     app/etc/modules/Datta_Ajaxminicart.xml
+app/design/frontend/base/default/layout/ajaxminicart.xml   app/design/frontend/base/default/layout/ajaxminicart.xml
+app/code/community/Datta/Ajaxminicart                      app/code/community/Datta/Ajaxminicart
+skin/frontend/base/default/ajaxminicart                    skin/frontend/base/default/ajaxminicart
+skin/frontend/base/default/images/ajax_load.gif            skin/frontend/base/default/images/ajax_load.gif
