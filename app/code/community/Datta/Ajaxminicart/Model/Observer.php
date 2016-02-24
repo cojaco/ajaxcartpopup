@@ -90,7 +90,8 @@ class Datta_Ajaxminicart_Model_Observer {
                 )
                 );                
                $count = $quote->getItemsCount();                
-               $html .='<div class="item-thumbnail">';                   
+               $countall = $quote->getAllItems();
+               $html .='<div class="item-thumbnail">';
                      if ($item->hasProductUrl()):
                        $html .='<a href="'. $item->getUrl().'" title="'. $item->getName().'" class="product-image"><img src="'. Mage::helper('catalog/image')->init($item->getProduct(), 'thumbnail').'" width="50" height="50" alt="'. $this->escapeHtml($item->getName()).'" /></a>';
                     else:
@@ -124,7 +125,7 @@ class Datta_Ajaxminicart_Model_Observer {
                     ->setCarttotal($grandTotal)
                     ->setCartsubtotal($subTotal)
                     ->setCartcount($count) 
-                    ->setCartcountall(20)
+                    ->setCartcountall($countall)
                     ->setDiscount($discount)
                     ->setShippingtaxamount($shippingTaxamount)
                     ->setCartitem($html)                                                                 
