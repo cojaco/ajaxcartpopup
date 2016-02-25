@@ -71,7 +71,7 @@ class Datta_Ajaxminicart_Model_Observer {
                             $attr = Mage::getModel('catalog/resource_eav_attribute')->load($key);
                             $optionlabel = $attr->getFrontendLabel($_superAttr);
                             $optionvalue = $attr->getSource()->getOptionText($_superAttr);
-                            $configoptions .= '<span class="optionvalue">'.$optionlabel.' </span><span class="optionvalue"> '.$optionvalue.'</span>';
+                            $configoptions .= '<div class="configoption"><span class="optionvalue">'.$optionlabel.' </span><span class="optionvalue"> '.$optionvalue.'</span></div>';
 
                         }
                     }
@@ -87,6 +87,11 @@ class Datta_Ajaxminicart_Model_Observer {
                 $productsku = $item->getSku();
                 $productname = $item->getName();
                 $productqty = $item->getQty();
+                $price = $item->getPrice();
+                setlocale(LC_MONETARY, 'de_DE.UTF-8');
+                $price =  money_format("%n", $price);
+               // $price = str_replace(" €", "", $price);
+
                 $_product = Mage::getModel('catalog/product')->load($product_id);
                 $url = Mage::getUrl(
                     'checkout/cart/deleteqty',
@@ -99,29 +104,29 @@ class Datta_Ajaxminicart_Model_Observer {
                 $countall = $quote->getItemsQty();
                 $html .='<div class="item-thumbnail">';
                 if ($item->hasProductUrl()):
-                    $html .='<a href="'. $item->getUrl().'" title="'. $item->getName().'" class="product-image"><img src="'. Mage::helper('catalog/image')->init($item->getProduct(), 'thumbnail').'" width="50" height="50" alt="'. $this->escapeHtml($item->getName()).'" /></a>';
+                    $html .='<a href="'. $item->getUrl().'" title="'. $item->getName().'" class="product-image"><img src="'. Mage::helper('catalog/image')->init($item->getProduct(), 'thumbnail')->resize(100).'" width="100" height="100" alt="'. $this->escapeHtml($item->getName()).'" /></a>';
                 else:
-                    $html .='<span><img src="'.Mage::helper('catalog/image')->init($item->getProduct(), 'thumbnail').'" width="50" height="50" alt="'.$item->getName() .'" /></span>';
+                    $html .='<span><img src="'.Mage::helper('catalog/image')->init($item->getProduct(), 'thumbnail')->resize(100).'" width="100" height="100" alt="'.$item->getName() .'" /></span>';
                 endif;
                 $html .='</div>';
                 $html .='<div class="mini-basket-content-wrapper">
                         <div class="mini-cart-name">
                         <a class="item-name" href="'.$item->getUrl().'">'.$productname.'</a>
-                    </div>'.$configoptions.'
+                    </div>
 
                             <div class="qty-btngroup">
                                 <button class="minus" type="button" onclick="setDeleteqty('.$productid.",'". $url."'".')">-</button>
                                  <input type="text" id="cart_qty_'.$productid.'" class="input-text qty" maxlength="12" title="Qty" size="4" value="'.$productqty.'" name="cart['.$productid.'][qty]" readonly="readonly">
                                 <button class="plus add-to-cart" type="button" onclick="setLocation('."'". Mage::getUrl('checkout/cart/add', array('product'=>$product_id)) ."?option=".$productser.$superAttrString."',".$productid.")".'">+</button>
                             </div>
+                            <div class="info_group">
 
-                        <span class="item-price">
-                           &nbsp;&nbsp;x
+                            '.$configoptions.'
 
-                                                    <span class="price">$'.$item->getPrice().'</span>
-
-                            </span>
-                                   </div> <a href="javascript:void(0);" id="'.$productid.'" onclick="setDeleteitem('.$productid.",'". $url."'".')" title="Remove item" class="remove-btn" ><span class="icon-remove"></span></a>
+                        <div class="itemqty"><span class="label">Anzahl : </span><span id="cartitem_qty_'.$productid.'">'.$productqty.'</span></div>
+                        <div class="item-price"><span class="label">Preis : </span> <span class="price">'.$price.'</span></div>
+                        </div>
+                        </div> <a href="javascript:void(0);" id="'.$productid.'" onclick="setDeleteitem('.$productid.",'". $url."'".')" title="Remove item" class="remove-btn" ><span class="icon-remove"></span></a>
                         <div class="clearfix"></div>';
 
                 $html .='</li>';
